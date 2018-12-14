@@ -1,0 +1,25 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <a class="navbar-brand" [routerLink]="['/home']">Concert Hall</a>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="router-link-active">
+        <a class="nav-link" [routerLink]="['/home']" style = "color:black">Comming events</a>
+      </li>
+      <li class="nav-item" routerLinkActive="router-lifnk-active">
+        <a class="nav-link" [routerLink]="['/home']" style = "color:black">Add event</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" name="username" placeholder="Username"
+       required>
+      <input class="form-control mr-sm-2" type="password" name="password" placeholder="Password"
+       required>
+      <button class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+    </form>
+  </div>
+</nav>
+
