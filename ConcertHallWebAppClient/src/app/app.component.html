@@ -5,7 +5,7 @@
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav mr-auto" style = "width:100%">
       <li class="nav-item active">
         <a style = "font-size: 22px; color:white">Hala koncertowa <span class="sr-only"></span></a>
       </li>
@@ -17,25 +17,19 @@
         <a class="nav-link"> <a routerLink="" style = "color:black" style = "color:black">Dodaj koncert</a>
         </a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Jan Jan
+      <li class="nav-item dropdown log-in"  routerLink="auth/login">
+        <a *ngIf ="isLoggedIn === false" class="nav-link " style="cursor:pointer">
+          Zaloguj
         </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#"></a>
-          <a class="dropdown-item" href="#">Dane osobiste</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Zmień hasło</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Wyloguj</a>
+        <a  *ngIf= "isLoggedIn" class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{username}}
+        </a>
+        <div class="dropdown-menu" style="min-width:8em" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" (click) = "logout()" href="#">Wyloguj</a>
         </div>
       </li>
- 
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Szukaj" aria-label="Search">
-      <button class="btn btn-success my-5 my-sm-0" type="submit">Szukaj</button>
-    </form>
+
   </div>
 </nav>
 

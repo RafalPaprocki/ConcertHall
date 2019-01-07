@@ -10,11 +10,19 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { AccordionModule } from 'ngx-bootstrap/accordion'
 import {ComponentLoaderFactory, PositioningService} from "ngx-bootstrap";
 import { ConcertHallMainViewComponent } from './components/concert-hall-main-view/concert-hall-main-view.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConcertHallMainViewComponent,
+    HomeComponent,
+    LoginComponent,
+    RegisterComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,

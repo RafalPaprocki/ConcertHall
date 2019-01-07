@@ -33,7 +33,7 @@ public class Ticket {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public Double getPrice() {
         return price;
     }
