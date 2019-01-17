@@ -10,8 +10,8 @@ baseUrl = 'http://localhost:8889/event';
 
 constructor(private http: HttpClient) { }
 
-newConcert(model: any) {
-  return this.http.post(this.baseUrl + '/add', model);
+newConcert(model: any, id: number) {
+  return this.http.post(this.baseUrl + '/add' + '/' + id, model);
 }
 
 }

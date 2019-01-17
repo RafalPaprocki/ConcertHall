@@ -12,3 +12,8 @@
     position:unset;
   }
 }
+
+.background-image{
+  background-image: url("../assets/images/sala-koncertowa-nospr.jpg") ;
+  background-size: 100%;
+}

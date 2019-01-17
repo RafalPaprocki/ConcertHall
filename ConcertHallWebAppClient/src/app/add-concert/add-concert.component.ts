@@ -9,6 +9,7 @@ import { AddingConcertService } from '../services/adding-concert.service';
 export class AddConcertComponent implements OnInit {
 
   model: any = {};
+  id: number;
 
   constructor(private addConcertService: AddingConcertService) { }
 
@@ -16,7 +17,9 @@ export class AddConcertComponent implements OnInit {
   }
 
   addConcert() {
-    this.addConcertService.newConcert(this.model);
+    this.addConcertService.newConcert(this.model, this.id).subscribe(data => {
+
+    });
     console.log(this.model);
   }
 
