@@ -15,32 +15,26 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     private String name;
 
-    @NotNull
     private String eventKind;
 
-    @NotNull
     private Date date;
 
-    @NotNull
     private Time startTime;
 
-    @NotNull
     private Time endTime;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "room_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "room_id", nullable = true)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
     private Room room;
 
-    @NotNull
     private String bandName;
 
-    @NotNull
     private String typeOfMusic;
+
+    private String price;
 
     public Long getId() {
         return id;
@@ -112,5 +106,13 @@ public class Event {
 
     public void setTypeOfMusic(String typeOfMusic) {
         this.typeOfMusic = typeOfMusic;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
     }
 }

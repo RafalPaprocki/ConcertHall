@@ -32,8 +32,6 @@ public class Seat {
         this.id = id;
     }
 
-
-
     public Room getRoom() {
         return room;
     }
