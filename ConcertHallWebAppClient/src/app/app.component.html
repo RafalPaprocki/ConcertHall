@@ -7,15 +7,13 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto" style = "width:100%">
       <li class="nav-item active">
-        <a style = "font-size: 22px; color:white">Hala koncertowa <span class="sr-only"></span></a>
+        <a style = "font-size: 22px; color:white" href="#">Hala koncertowa <span class="sr-only"></span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link"> <a routerLink="" style = "color:black">Główny koncertów</a>
-        </a>
+      <li class="nav-item" routerLinkActive="router-link-active">
+          <a class="nav-link" [routerLink]="['/concerts']">Koncerty</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link"> <a routerLink="" style = "color:black" style = "color:black">Dodaj koncert</a>
-        </a>
+      <li class="nav-item " routerLinkActive="router-link-active"> 
+          <a class="nav-link" [routerLink]="['/adding']">Dodaj koncert</a>
       </li>
       <li class="nav-item dropdown log-in"  routerLink="auth/login">
         <a *ngIf ="isLoggedIn === false" class="nav-link " style="cursor:pointer">
