@@ -1,5 +1,5 @@
 .bg-light{
-  background-color: #0101ff9c !important;
+  background-color: #0503036b !important;
 }
 
 .log-in{
@@ -11,4 +11,9 @@
   .log-in{
     position:unset;
   }
+}
+
+.background-image{
+  background-image: url("../assets/images/sala-koncertowa-nospr.jpg") ;
+  background-size: 100%;
 }

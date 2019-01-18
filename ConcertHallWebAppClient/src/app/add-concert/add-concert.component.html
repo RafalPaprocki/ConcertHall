@@ -1,0 +1,39 @@
+<div class="container" style="background-color: ghostwhite">
+<form>
+    <div class="form-group">
+      <label>Nazwa Wydarzenia</label>
+      <input type="text" class="form-control" placeholder="Enter event's name" [(ngModel)]="model.name" name="sth">
+    </div>
+    <div class="form-group">
+      <label>Typ Wydarzenia</label>
+      <input type="text" class="form-control" placeholder="Enter event's type"  [(ngModel)]="model.eventKind" name="sth">
+    </div>
+    <div class="form-group">
+        <label>Nazwa zespołu</label>
+        <input type="text" class="form-control" placeholder="Enter bands'name"  [(ngModel)]="model.bandName" name="sth">
+    </div>
+    <div class="form-group">
+        <label>Rodzaj muzyki</label>
+        <input type="text" class="form-control" placeholder="Enter music's type"  [(ngModel)]="model.typeOfMusic" name="sth">
+    </div>
+    <div class="form-group">
+        <label>Nr. Sali</label>
+        <input type="text" class="form-control" placeholder="Enter room's id" [(ngModel)]="id" name="sth">
+    </div>
+    <div class="form-group">
+        <label>Data rozpoczęcia</label>
+        <input type="text" class="form-control" placeholder="Enter start date" [(ngModel)]="model.date" name="sth">
+    </div>
+    <div class="form-group">
+        <label>Czas rozpoczęcia</label>
+        <input type="text" class="form-control" placeholder="Enter start time" [(ngModel)]="model.startTime" name="sth">
+    </div>
+    <div class="form-group">
+        <label>Cena</label>
+        <input type="text" class="form-control" placeholder="Enter price" [(ngModel)]="model.price" name="sth">
+    </div>
+    <button type="submit" class="btn btn-primary" (click)="addConcert()">Dodaj</button>
+</form>
+</div>
+
+
