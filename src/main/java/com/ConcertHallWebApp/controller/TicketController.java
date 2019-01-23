@@ -1,7 +1,9 @@
 package com.ConcertHallWebApp.controller;
 
+import com.ConcertHallWebApp.mail.EmailServiceImpl;
 import com.ConcertHallWebApp.message.request.TicketAddBody;
 import com.ConcertHallWebApp.model.*;
+import com.ConcertHallWebApp.operations.PDFGenerator;
 import com.ConcertHallWebApp.repository.EventRepository;
 import com.ConcertHallWebApp.repository.SeatRepository;
 import com.ConcertHallWebApp.repository.TicketRepository;
@@ -27,11 +29,15 @@ public class TicketController {
     @Autowired
     public UserRepository userRepository;
 
+    @Autowired
+    public EmailServiceImpl emailService;
+
     @PostMapping("/ticket")
     public Ticket addTicket(@Valid @RequestBody TicketAddBody body){
         Event event = eventRepository.findById(body.getEvent_id()).orElseThrow(() -> new RuntimeException("Nie znaleziono wydarzenia"));
         Seat seat = seatRepository.findById(body.getSeat_id()).orElseThrow(() -> new RuntimeException("Nie znaleziono miejsca"));
-        User user = userRepository.findById(body.getUser_id()).orElseThrow(() -> new RuntimeException(("Nie znaleziono użytkownika")));
+        User user = userRepository.findByUsername(body.getUser_name()).orElseThrow(() -> new RuntimeException(("Nie znaleziono użytkownika")));
+
 
         Ticket ticket = new Ticket();
         ticket.setPrice(body.getPrice());
@@ -39,6 +45,11 @@ public class TicketController {
         ticket.setSeat(seat);
         ticket.setUser(user);
 
+        PDFGenerator pdfGenerator = new PDFGenerator();
+        pdfGenerator.saveTicketPDF(event, user);
+
+        emailService.sendMessageWithAttachment(user.getEmail(), "Bilet na koncert", "Witaj. Dziękujemy za dokonanie mądrego wyboru. Bilet w załaczniku.", "ticket.pdf");
+        PDFGenerator.DeleteFile("ticket.pdf");
         return ticketRepository.save(ticket);
     }
 }

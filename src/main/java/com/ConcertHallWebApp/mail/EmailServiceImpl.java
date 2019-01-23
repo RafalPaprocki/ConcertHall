@@ -45,7 +45,7 @@ public class EmailServiceImpl implements EmailService {
             helper.setText(text);
 
             FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
-            helper.addAttachment("Bilet.docx", file);
+            helper.addAttachment("Bilet.pdf", file);
 
             emailSender.send(message);
         } catch (MessagingException e) {

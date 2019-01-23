@@ -3,6 +3,7 @@ package com.ConcertHallWebApp.operations;
 import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 import java.util.stream.Stream;
@@ -33,7 +34,7 @@ public class PDFGenerator {
     public void saveTicketPDF(Event event, User user){
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("ticket14.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("ticket.pdf"));
             document.open();
             Font font = FontFactory.getFont(FontFactory.COURIER, 24, BaseColor.BLACK);
             Font font1 = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
@@ -91,7 +92,22 @@ public class PDFGenerator {
             System.out.println();
         }
     }
+    public static void DeleteFile(String path)
+    {
+        try{
+            File file = new File(path);
+            if(file.delete()){
+                System.out.println(file.getName() + " zostal skasowany!");
+            }else{
+                System.out.println("Operacja kasowania sie nie powiodla.");
+            }
 
+        }catch(Exception e){
+
+            e.printStackTrace();
+
+        }
+    }
     public static ByteArrayInputStream customerPDFReport(List<Ticket> customers) {
         Document document = new Document();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
