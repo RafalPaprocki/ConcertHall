@@ -7,12 +7,12 @@ import { TokenStorageService } from './auth/token-storage.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = "ConcertHallClient";
+  title = 'ConcertHallClient';
   private roles: string[];
   private authority: string;
   private isLoggedIn = false;
   private username;
-  constructor(  private token: TokenStorageService,private tokenStorage: TokenStorageService) { }
+  constructor(  private token: TokenStorageService, private tokenStorage: TokenStorageService) { }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -37,4 +37,5 @@ export class AppComponent implements OnInit {
     this.token.signOut();
     window.location.reload();
   }
+
 }

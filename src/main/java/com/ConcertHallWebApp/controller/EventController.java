@@ -10,6 +10,7 @@ import com.ConcertHallWebApp.operations.PDFGenerator;
 import com.ConcertHallWebApp.repository.EventRepository;
 import com.ConcertHallWebApp.repository.RoomRepository;
 import com.ConcertHallWebApp.repository.TicketRepository;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.pdf.PdfWriter;
 import org.apache.poi.ss.usermodel.Workbook;

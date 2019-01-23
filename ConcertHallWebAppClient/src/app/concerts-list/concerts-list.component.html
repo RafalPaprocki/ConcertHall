@@ -1,5 +1,4 @@
 <div style="overflow:auto;min-height:90vh;">
-  <button class="btn btn-success" (click) = "exportToExcel()">Export do excela</button>
 <table class="table" style="background-color: ghostwhite">
   <thead>
     <tr>
@@ -12,12 +11,12 @@
   </thead>
   <tbody>
   <tr>
-    <tr>
-      <td>Metallica tour 2019</td>
-      <td>17-01-2019</td>
-      <td>Metallica</td>
-      <td>{{89.99 | currency}}</td>
-      <td><button type="submit" class="btn btn-primary" (click)="buyTicket()">Kup Bilet</button></td>
+    <tr *ngFor="let c of concerts">
+      <td>{{c.name}}</td>
+      <td>{{c.date | date:'yyyy-MM-dd HH:mm'}}</td>
+      <td>{{c.bandName}}</td>
+      <td>{{c.price | currency}}</td>
+      <td *ngIf="this.isLoggedIn"><a [routerLink]="[ '/buy', c.id, c.price ]"><button type="submit" class="btn btn-primary" (click)="buyTicket()">Buy Ticket</button></a></td>
     </tr>
   </tbody>
 </table>

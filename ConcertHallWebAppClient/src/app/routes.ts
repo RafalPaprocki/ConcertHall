@@ -7,7 +7,7 @@ import { BuyTicketComponent } from './buy-ticket/buy-ticket.component';
 export const appRoutes: Routes = [
     { path: 'adding', component : AddConcertComponent},
     { path: 'concerts', component : ConcertsListComponent},
-    { path: 'buy', component : BuyTicketComponent},
+    { path: 'buy/:id/:price', component : BuyTicketComponent},
 
     // has to be last
     { path: '**', redirectTo: 'concerthallmainview', pathMatch: 'full'}

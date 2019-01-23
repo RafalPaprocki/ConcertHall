@@ -1,3 +1,31 @@
-<p>
-  buy-ticket works!
-</p>
+<div style="overflow:auto;min-height:90vh;">
+  <table class="table" style="background-color: ghostwhite">
+    <thead>
+      <tr>
+        <th scope="col">Event Id</th>
+        <th scope="col">Price</th>
+        <th scope="col">Seat Id</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>
+          {{id}}
+        </td>
+        <td>
+          {{price | currency}}
+        </td>
+        <td>
+        <select [(ngModel)]="seatId">
+            <option *ngFor="let s of seats">{{s.id}}</option>
+        </select>
+        </td>
+        <td *ngIf="isLoggedIn">
+            <button type="submit" class="btn btn-primary" (click)="buyTicket()">Buy Ticket</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  
