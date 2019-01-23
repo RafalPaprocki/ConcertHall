@@ -15,4 +15,8 @@ export class ConcertHallService {
   getRooms(): Observable<any>{
     return this.http.get('//localhost:8889/room/all');
   }
+
+  exportExcel() : Observable<any>{
+    return this.http.get('//localhost:8889/download/customers.xlsx');
+  }
 }

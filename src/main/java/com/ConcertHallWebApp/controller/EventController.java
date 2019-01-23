@@ -1,5 +1,6 @@
 package com.ConcertHallWebApp.controller;
 
+import com.ConcertHallWebApp.mail.EmailServiceImpl;
 import com.ConcertHallWebApp.message.request.SignUpForm;
 import com.ConcertHallWebApp.model.Event;
 import com.ConcertHallWebApp.model.Room;
@@ -9,6 +10,9 @@ import com.ConcertHallWebApp.operations.PDFGenerator;
 import com.ConcertHallWebApp.repository.EventRepository;
 import com.ConcertHallWebApp.repository.RoomRepository;
 import com.ConcertHallWebApp.repository.TicketRepository;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.data.domain.Page;
@@ -21,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -36,6 +41,15 @@ public class EventController {
     @Autowired
     private TicketRepository ticketRepository;
 
+    @Autowired
+    public EmailServiceImpl emailService;
+
+    @GetMapping("send/mail")
+    public String sendMail(){
+        emailService.sendSimpleMessage("rafalpaprocki@o2.pl", "mojmaildlaciebie", "Witaj prosze wyslij sie");
+        emailService.sendMessageWithAttachment("rafalpaprocki@o2.pl", "mojmailikforyou", "Witaj prosze wyślij sięty też z załacznikiem prosze", "attach.docx");
+        return "s";
+    }
     @GetMapping("/event/all")
     public List<Event> getAllEvent(){
         return eventRepository.findAll();
@@ -54,13 +68,19 @@ public class EventController {
         return e;
     }
 
+    @GetMapping("/save/ticket/pdf")
+    public String saveTicketAsPDF() throws IOException {
+        PDFGenerator gen = new PDFGenerator();
+        gen.saveTicketPDF(null,null);
+        return "poszło";
+    }
+
     @GetMapping(value = "/pdf/ticket",
             produces = MediaType.APPLICATION_PDF_VALUE)
     public ResponseEntity<InputStreamResource> customersReport(HttpServletResponse response) throws IOException {
         List<Ticket> customers = (List<Ticket>) ticketRepository.findAll();
 
         ByteArrayInputStream bis = PDFGenerator.customerPDFReport(customers);
-
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=customers.pdf");
 
