@@ -1,5 +1,6 @@
 package com.ConcertHallWebApp.operations;
 
+import java.awt.*;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
@@ -32,19 +33,57 @@ public class PDFGenerator {
     public void saveTicketPDF(Event event, User user){
         try {
             Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream("ticket4.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("ticket14.pdf"));
             document.open();
             Font font = FontFactory.getFont(FontFactory.COURIER, 24, BaseColor.BLACK);
+            Font font1 = FontFactory.getFont(FontFactory.COURIER, 14, BaseColor.BLACK);
+            font.setColor(BaseColor.MAGENTA);
             Chunk chunk = new Chunk("Bilet na koncert", font);
             Paragraph paragraph = new Paragraph(50);
             paragraph.add(chunk);
             paragraph.setAlignment(Element.ALIGN_CENTER);
-            paragraph.setSpacingAfter(50);
+            paragraph.setSpacingAfter(30);
             document.add(paragraph);
-            PdfPTable table = new PdfPTable(3);
-            addTableHeader(table);
-            addRows(table);
+            font1.setStyle(Font.BOLD);
+            Chunk chunk1 = new Chunk("Dane na temat koncertu: ", font1);
+            Chunk chunk2 = new Chunk("Dane na temat nabywcy: ", font1);
+            Paragraph paragraph1 = new Paragraph(20);
+            paragraph1.add(chunk1);
 
+            Paragraph paragraph2 = new Paragraph(20);
+            paragraph2.add("Nazwa koncertu : " + event.getName());
+
+            Paragraph data = new Paragraph(20);
+            data.add("Data koncertu: " + event.getDate().toString() + ", godzina: " +  event.getStartTime().toString());
+
+            Paragraph localization = new Paragraph(20);
+            localization.add("Sala numer 1, miejsce 43");
+
+            Paragraph userData = new Paragraph(20);
+            userData.add(chunk2);
+
+            Paragraph username = new Paragraph(20);
+            username.add("Nabywca: " + user.getName());
+
+            Paragraph email = new Paragraph(20);
+            email.add("Email: " + user.getEmail());
+
+            PdfPTable table = new PdfPTable(2);
+            PdfPCell cell1 = new PdfPCell(new Paragraph(paragraph1));
+            cell1.addElement(paragraph2);
+            cell1.addElement(data);
+            cell1.addElement(localization);
+            PdfPCell cell2 = new PdfPCell(paragraph1);
+            cell2.addElement(userData);
+            cell2.addElement(username);
+            cell2.addElement(email);
+            table.addCell(cell1);
+            table.addCell(cell2);
+
+            cell1.setBorderWidth(2f);
+            cell1.setBorderColor(BaseColor.GREEN);
+            cell2.setBorderColor(BaseColor.BLUE);
+            cell2.setBorderColorLeft(BaseColor.ORANGE);
             document.add(table);
             document.close();
         }
@@ -52,24 +91,6 @@ public class PDFGenerator {
             System.out.println();
         }
     }
-
-    private void addTableHeader(PdfPTable table) {
-        Stream.of("column header 1", "column header 2", "column header 3")
-                .forEach(columnTitle -> {
-                    PdfPCell header = new PdfPCell();
-                    header.setBackgroundColor(BaseColor.LIGHT_GRAY);
-                    header.setBorderWidth(2);
-                    header.setPhrase(new Phrase(columnTitle));
-                    table.addCell(header);
-                });
-    }
-
-    private void addRows(PdfPTable table) {
-        table.addCell("row 1, col 1");
-        table.addCell("row 1, col 2");
-        table.addCell("row 1, col 3");
-    }
-
 
     public static ByteArrayInputStream customerPDFReport(List<Ticket> customers) {
         Document document = new Document();

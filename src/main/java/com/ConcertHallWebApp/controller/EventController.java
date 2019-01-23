@@ -44,12 +44,13 @@ public class EventController {
     @Autowired
     public EmailServiceImpl emailService;
 
-    @GetMapping("send/mail")
+    @GetMapping("/send/mail")
     public String sendMail(){
         emailService.sendSimpleMessage("rafalpaprocki@o2.pl", "mojmaildlaciebie", "Witaj prosze wyslij sie");
         emailService.sendMessageWithAttachment("rafalpaprocki@o2.pl", "mojmailikforyou", "Witaj prosze wyślij sięty też z załacznikiem prosze", "attach.docx");
         return "s";
     }
+
     @GetMapping("/event/all")
     public List<Event> getAllEvent(){
         return eventRepository.findAll();
