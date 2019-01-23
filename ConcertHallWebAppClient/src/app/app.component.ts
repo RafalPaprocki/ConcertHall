@@ -38,4 +38,7 @@ export class AppComponent implements OnInit {
     window.location.reload();
   }
 
+  isAdmin() {
+    return this.authority === 'admin';
+  }
 }

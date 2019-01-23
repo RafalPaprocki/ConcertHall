@@ -12,7 +12,7 @@
       <li class="nav-item" routerLinkActive="router-link-active">
           <a class="nav-link" [routerLink]="['/concerts']">Koncerty</a>
       </li>
-      <li class="nav-item " routerLinkActive="router-link-active"> 
+      <li class="nav-item " routerLinkActive="router-link-active" *ngIf="isAdmin()"> 
           <a class="nav-link" [routerLink]="['/adding']">Dodaj koncert</a>
       </li>
       <li class="nav-item dropdown log-in"  routerLink="auth/login">
