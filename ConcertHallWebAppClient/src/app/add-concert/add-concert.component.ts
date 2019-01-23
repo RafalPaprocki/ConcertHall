@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AddingConcertService } from '../services/adding-concert.service';
+import { AlertifyService } from '../services/alertify.service';
 
 @Component({
   selector: 'app-add-concert',
@@ -12,13 +13,17 @@ export class AddConcertComponent implements OnInit {
   id: number;
 
 
-  constructor(private addConcertService: AddingConcertService) { }
+  constructor(private addConcertService: AddingConcertService, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
 
   addConcert() {
-    this.addConcertService.newConcert(this.model, this.id).subscribe(data => {
+    this.addConcertService.newConcert(this.model, this.id).subscribe(() => {
+      this.alertify.success('sucess');
+      console.log('asdasd');
+    }, error => {
+      this.alertify.error(error);
     });
   }
 

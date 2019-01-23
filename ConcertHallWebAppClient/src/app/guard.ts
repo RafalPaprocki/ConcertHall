@@ -7,7 +7,7 @@ import { TokenStorageService } from './auth/token-storage.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, OnInit{
+export class AuthGuard implements CanActivate, OnInit {
 
 
     private roles: string[];

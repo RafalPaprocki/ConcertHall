@@ -47,4 +47,12 @@ export class ConcertsListComponent implements OnInit {
       this.concerts = data;
   });
 }
+
+  isAdmin() {
+    return this.authority === 'admin';
+  }
+
+  deleteEvent() {
+    
+  }
 }

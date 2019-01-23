@@ -13,10 +13,11 @@
   <tr>
     <tr *ngFor="let c of concerts">
       <td>{{c.name}}</td>
-      <td>{{c.date | date:'yyyy-MM-dd HH:mm'}}</td>
+      <td>{{c.date | date:'yyyy-MM-dd'}}, {{c.startTime}}</td>
       <td>{{c.bandName}}</td>
       <td>{{c.price | currency}}</td>
-      <td *ngIf="this.isLoggedIn"><a [routerLink]="[ '/buy', c.id, c.price ]"><button type="submit" class="btn btn-primary" (click)="buyTicket()">Buy Ticket</button></a></td>
+      <td *ngIf="this.isLoggedIn && !isAdmin()"><a [routerLink]="[ '/buy', c.id, c.price ]"><button type="submit" class="btn btn-primary" (click)="buyTicket()">Buy Ticket</button></a></td>
+      <td *ngIf="this.isLoggedIn && isAdmin()"><button type="submit" class="btn btn-primary" (click)="deleteEvent()">Remove</button></td>
     </tr>
   </tbody>
 </table>
