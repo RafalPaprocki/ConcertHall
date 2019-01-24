@@ -20,7 +20,7 @@ public class SeatController {
 
     @GetMapping("/seat/all")
     public List<Seat> getAllCustomers(Pageable pageable){
-        return seatRepository.findAll();
+        return seatRepository.findByOccupied(false);
     }
 
 }

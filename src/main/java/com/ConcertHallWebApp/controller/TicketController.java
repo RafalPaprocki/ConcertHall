@@ -45,12 +45,15 @@ public class TicketController {
         ticket.setSeat(seat);
         ticket.setUser(user);
 
+        seat.setOccupied(true);
+        seatRepository.save(seat);
+
         PDFGenerator pdfGenerator = new PDFGenerator();
         pdfGenerator.saveTicketPDF(event, user);
 
         EmailSenderRunnable sender = new EmailSenderRunnable(emailService, user.getEmail());
         sender.run();
-        
+
         return ticketRepository.save(ticket);
     }
 }

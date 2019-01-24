@@ -1,5 +1,6 @@
 package com.ConcertHallWebApp.controller;
 
+import com.ConcertHallWebApp.Exceptions.ResourceNotFoundException;
 import com.ConcertHallWebApp.mail.EmailServiceImpl;
 import com.ConcertHallWebApp.message.request.SignUpForm;
 import com.ConcertHallWebApp.model.Event;
@@ -107,5 +108,13 @@ public class EventController {
                 .ok()
                 .headers(headers)
                 .body(new InputStreamResource(in));
+    }
+
+    @DeleteMapping(value = "/event/{eventId}")
+    public ResponseEntity<?> deleteEvent(@PathVariable Long eventId) {
+        return  eventRepository.findById(eventId).map(event -> {
+            eventRepository.delete(event);
+            return ResponseEntity.ok().build();
+        }).orElseThrow(() -> new ResourceNotFoundException("Nie ma zdzarzenia które chcesz usunąć"));
     }
 }
