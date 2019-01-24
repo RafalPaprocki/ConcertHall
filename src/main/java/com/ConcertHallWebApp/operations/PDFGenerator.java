@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import com.ConcertHallWebApp.model.Event;
+import com.ConcertHallWebApp.model.Seat;
 import com.ConcertHallWebApp.model.Ticket;
 import com.ConcertHallWebApp.model.User;
 import org.slf4j.Logger;
@@ -31,7 +32,7 @@ public class PDFGenerator {
 
     private static Logger logger = LoggerFactory.getLogger(PDFGenerator.class);
 
-    public void saveTicketPDF(Event event, User user){
+    public void saveTicketPDF(Event event, User user, Seat seat){
         try {
             Document document = new Document();
             PdfWriter.getInstance(document, new FileOutputStream("ticket.pdf"));
@@ -58,7 +59,7 @@ public class PDFGenerator {
             data.add("Data koncertu: " + event.getDate().toString() + ", godzina: " +  event.getStartTime().toString());
 
             Paragraph localization = new Paragraph(20);
-            localization.add("Sala numer 1, miejsce 43");
+            localization.add("Sala numer " + seat.getRoom().getName() + " , miejsce " + seat.getId());
 
             Paragraph userData = new Paragraph(20);
             userData.add(chunk2);
@@ -70,7 +71,8 @@ public class PDFGenerator {
             email.add("Email: " + user.getEmail());
 
             PdfPTable table = new PdfPTable(2);
-            PdfPCell cell1 = new PdfPCell(new Paragraph(paragraph1));
+            PdfPCell cell1 = new PdfPCell(paragraph1);
+            cell1.addElement(paragraph1);
             cell1.addElement(paragraph2);
             cell1.addElement(data);
             cell1.addElement(localization);

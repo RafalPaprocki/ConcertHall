@@ -49,7 +49,7 @@ public class TicketController {
         seatRepository.save(seat);
 
         PDFGenerator pdfGenerator = new PDFGenerator();
-        pdfGenerator.saveTicketPDF(event, user);
+        pdfGenerator.saveTicketPDF(event, user, seat);
 
         EmailSenderRunnable sender = new EmailSenderRunnable(emailService, user.getEmail());
         sender.run();

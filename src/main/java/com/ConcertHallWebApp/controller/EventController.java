@@ -46,13 +46,6 @@ public class EventController {
     @Autowired
     public EmailServiceImpl emailService;
 
-    @GetMapping("/send/mail")
-    public String sendMail(){
-        emailService.sendSimpleMessage("rafalpaprocki@o2.pl", "mojmaildlaciebie", "Witaj prosze wyslij sie");
-        emailService.sendMessageWithAttachment("rafalpaprocki@o2.pl", "mojmailikforyou", "Witaj prosze wyślij sięty też z załacznikiem prosze", "attach.docx");
-        return "s";
-    }
-
     @GetMapping("/event/all")
     public List<Event> getAllEvent(){
         return eventRepository.findAll();
@@ -69,13 +62,6 @@ public class EventController {
         event.setRoom(room);
         Event e = eventRepository.save(event);
         return e;
-    }
-
-    @GetMapping("/save/ticket/pdf")
-    public String saveTicketAsPDF() throws IOException {
-        PDFGenerator gen = new PDFGenerator();
-        gen.saveTicketPDF(null,null);
-        return "poszło";
     }
 
     @GetMapping(value = "/pdf/ticket",
@@ -96,10 +82,9 @@ public class EventController {
 
     @GetMapping(value = "/download/customers.xlsx")
     public ResponseEntity<InputStreamResource> excelCustomersReport() throws IOException {
-        List<Event> customers = (List<Event>) eventRepository.findAll();
+        List<Event> customers = eventRepository.findAll();
 
         ByteArrayInputStream in = ExcelGenerator.customersToExcel(customers);
-        // return IOUtils.toByteArray(in);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("Content-Disposition", "attachment; filename=customers.xlsx");
