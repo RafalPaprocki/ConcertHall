@@ -1,5 +1,6 @@
 package com.ConcertHallWebApp.controller;
 
+import com.ConcertHallWebApp.mail.EmailSenderRunnable;
 import com.ConcertHallWebApp.mail.EmailServiceImpl;
 import com.ConcertHallWebApp.message.request.TicketAddBody;
 import com.ConcertHallWebApp.model.*;
@@ -38,7 +39,6 @@ public class TicketController {
         Seat seat = seatRepository.findById(body.getSeat_id()).orElseThrow(() -> new RuntimeException("Nie znaleziono miejsca"));
         User user = userRepository.findByUsername(body.getUser_name()).orElseThrow(() -> new RuntimeException(("Nie znaleziono użytkownika")));
 
-
         Ticket ticket = new Ticket();
         ticket.setPrice(body.getPrice());
         ticket.setEvent(event);
@@ -48,8 +48,9 @@ public class TicketController {
         PDFGenerator pdfGenerator = new PDFGenerator();
         pdfGenerator.saveTicketPDF(event, user);
 
-        emailService.sendMessageWithAttachment(user.getEmail(), "Bilet na koncert", "Witaj. Dziękujemy za dokonanie mądrego wyboru. Bilet w załaczniku.", "ticket.pdf");
-        PDFGenerator.DeleteFile("ticket.pdf");
+        EmailSenderRunnable sender = new EmailSenderRunnable(emailService, user.getEmail());
+        sender.run();
+        
         return ticketRepository.save(ticket);
     }
 }

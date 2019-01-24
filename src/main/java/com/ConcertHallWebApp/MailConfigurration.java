@@ -14,6 +14,12 @@ import java.util.Properties;
 @Configuration
 @EnableWebMvc
 public class MailConfigurration implements WebMvcConfigurer {
+
+    private final String p = "Prop";
+
+    @Bean(name="p")
+    public String getP(){return p;}
+
     @Primary
     @Bean
     public JavaMailSender getJavaMailSender() {
